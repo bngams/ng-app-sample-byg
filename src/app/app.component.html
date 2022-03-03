@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="content" role="main">
 
   <!-- interpolation / Angular expression -->
@@ -21,7 +23,7 @@
       <img src="{{imgUrl}}" alt="some image">
 
       <!-- dynamic property binding [src] = myVar <=> {{ src = myVar }} -->
-      <img [src]="imgUrl" [alt]="name" [attr.data-name]="name">
+      <img [src]="imgUrl" alt="string" [alt]="'string'" [attr.data-name]="name">
     </p>
 
     <svg id="rocket" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678" viewBox="0 0 101.678 101.678">
