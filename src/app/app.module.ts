@@ -12,7 +12,8 @@ import { GetStartedPageComponent } from './global/get-started-page/get-started-p
 import { NotFoundPageComponent } from './global/not-found-page/not-found-page.component';
 import { SharedModule } from './utils/modules/shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpErrorInterceptor } from './utils/interceptors/http-error.interceptor';
+import { HttpErrorInterceptor, HTTP_ERROR_INTERCEPTOR_PROVIDER } from './utils/interceptors/http-error.interceptor';
+import { HttpTokenInterceptor } from './utils/interceptors/http-token.interceptor';
 
 @NgModule({
   // html syntax (components <custom-markup>; pipe | ...; directives)
@@ -38,9 +39,10 @@ import { HttpErrorInterceptor } from './utils/interceptors/http-error.intercepto
   ],
   // DI
   providers: [
+    HTTP_ERROR_INTERCEPTOR_PROVIDER,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
+      useClass: HttpTokenInterceptor,
       multi: true
     }
   ],

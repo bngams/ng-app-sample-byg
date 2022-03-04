@@ -4,7 +4,8 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpErrorResponse
+  HttpErrorResponse,
+  HTTP_INTERCEPTORS
 } from '@angular/common/http';
 import { catchError, Observable, retry, retryWhen, tap, throwError } from 'rxjs';
 
@@ -43,4 +44,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       new Error('Something bad happened; please try again later.')
     });
   }
+}
+
+export const HTTP_ERROR_INTERCEPTOR_PROVIDER = {
+  provide: HTTP_INTERCEPTORS,
+  useClass: HttpErrorInterceptor,
+  multi: true
 }
