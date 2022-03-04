@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
       <mat-toolbar color="primary">
         <span>My Application</span>
         <ul class="menu">
-          <li class="menu-item">Lien 1</li>
-          <li class="menu-item">Lien 2</li>
-          <li class="menu-item">Lien 3</li>
+          <li class="menu-item" routerLink="/home" routerLinkActive="active">Home</li>
+          <li class="menu-item" routerLink="/get-started" routerLinkActive="active">Get Started</li>
+          <li class="menu-item" routerLink="/blog" routerLinkActive="active">Blog</li>
+          <li class="menu-item" routerLink="/product" routerLinkActive="active">Product</li>
+          <li class="menu-item" routerLink="/cart" routerLinkActive="active">Cart</li>
+          <li class="menu-item" routerLink="/login" routerLinkActive="active">Login</li>
         </ul>
       </mat-toolbar>
     </header>
@@ -30,6 +33,9 @@ import { Component, OnInit } from '@angular/core';
         margin: 10px;
         &:hover {
           text-decoration: underline;
+        }
+        &.active {
+          font-weight: bolder;
         }
       }
 
