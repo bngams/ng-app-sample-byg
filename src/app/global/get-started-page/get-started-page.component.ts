@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RxJSDemoService } from '../../utils/services/rx-jsdemo.service';
 
 @Component({
   selector: 'app-get-started-page',
@@ -14,9 +15,10 @@ export class GetStartedPageComponent implements OnInit {
   state = false;
   fruits = ['orange', 'banana', 'apple']
 
-  constructor() { }
+  constructor(private rx: RxJSDemoService) { }
 
   ngOnInit(): void {
+    this.rx.demoObservable();
   }
 
   clickMe(event: MouseEvent): void {

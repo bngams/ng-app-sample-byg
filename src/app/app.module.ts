@@ -11,6 +11,7 @@ import { HomePageComponent } from './global/home-page/home-page.component';
 import { GetStartedPageComponent } from './global/get-started-page/get-started-page.component';
 import { NotFoundPageComponent } from './global/not-found-page/not-found-page.component';
 import { SharedModule } from './utils/modules/shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   // html syntax (components <custom-markup>; pipe | ...; directives)
@@ -27,6 +28,7 @@ import { SharedModule } from './utils/modules/shared/shared.module';
     BrowserModule, // => CommonModule => declares and exports UppercasePipe
     BrowserAnimationsModule,
     AppRoutingModule, // => imports RouterModule
+    HttpClientModule,
     SharedModule
   ],
   // export features for other modules

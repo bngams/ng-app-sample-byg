@@ -1,6 +1,8 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Observable } from 'rxjs';
 import { PRODUCTS } from '../../mocks/products-data.mock';
 import { Product } from '../../models/product';
+import { ProductService } from '../../services/product.service';
 import { ProductCardComponent } from '../product-card/product-card.component';
 
 @Component({
@@ -13,14 +15,13 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
   @Input()
   parentProductList!: Array<Product>;
+  products: Product[] = new Array();
+  products$: Observable<Product[]> = this.productService.listAllProducts();
 
   @ViewChildren(ProductCardComponent) productCards!: QueryList<ProductCardComponent>;
 
-  products: Product[] = new Array();
-
   // DI
-  constructor(
-  ) { }
+  constructor(private productService: ProductService) { }
 
   // Initialization
   ngOnInit() {
@@ -31,9 +32,15 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     console.log('product cards view children ', this.productCards.toArray())
   }
 
-  loadProductsViaMock() {
+  loadProductsViaMock(): void {
     // via mock
     this.products = PRODUCTS;
+  }
+
+  loadProductsViaHttp(): void {
+    this.productService.listAllProducts().subscribe(products =>
+      this.products = products
+    );
   }
 
 
