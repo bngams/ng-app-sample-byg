@@ -9,6 +9,15 @@ import { Product } from '../../models/product';
 })
 export class ProductDashboardPageComponent implements OnInit {
 
+  localProductList: Array<Product> = [];
+
+  // sample getter
+  _sample!: string;
+
+  get sample() {
+    return this._sample;
+  }
+
   // component instance
   @ViewChild(ProductListComponent, { static: false } )
   productList!: ProductListComponent;
@@ -25,6 +34,7 @@ export class ProductDashboardPageComponent implements OnInit {
 
   handleProductSubmit(p: Product) {
     // products de app-product-list
+    this.localProductList.push(p);
     this.productList.products.push(p);
   }
 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { PreloadAllModules, PreloadingStrategy, Route, RouterModule, Routes } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { GetStartedPageComponent } from './global/get-started-page/get-started-page.component';
@@ -9,6 +9,8 @@ const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomePageComponent},
   {path: 'get-started', component: GetStartedPageComponent},
+  // old lazy loading syntax
+  // { path: 'product', loadChildren: './modules/product/product.module#ProductModule' }, // NgModuleFactory
   {path: 'blog', data: ['offline'], loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule)},
   {path: 'product', loadChildren: () => import('./product/product.module').then(m => m.ProductModule)},
   {path: 'cart', loadChildren: () => import('./cart/cart.module').then(m => m.CartModule)},
@@ -16,6 +18,9 @@ const routes: Routes = [
   {path: '**', component: NotFoundPageComponent},
 ];
 
+@Injectable({
+  providedIn: 'root'
+})
 export class PreloadOfflineModuleStrategy implements PreloadingStrategy {
     preload(route: Route, load: Function): Observable<any> {
       return route.data && route.data['offline'] ? load() : of(null);
